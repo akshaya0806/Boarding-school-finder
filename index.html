@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BoardingFinder – Compare Boarding Schools in India</title>
+<style>
+:root{--bg:#f7f5ef;--card:#fff;--ink:#1b2a41;--mut:#5b6678;--acc:#0f6b5c;--acc2:#e8a33d;--line:#e2ded2;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171f;--card:#18222d;--ink:#eef1f5;--mut:#9aa7b8;--acc:#3fc1a8;--acc2:#f0b95a;--line:#2a3846;--on:#06201a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10171f;--card:#18222d;--ink:#eef1f5;--mut:#9aa7b8;--acc:#3fc1a8;--acc2:#f0b95a;--line:#2a3846;--on:#06201a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:70px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:0 18px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font-weight:800;font-size:20px;text-decoration:none}.logo b{color:var(--acc)}
+nav .links{margin-left:auto;display:flex;gap:18px;align-items:center}
+nav .links a{text-decoration:none;color:var(--mut);font-size:15px}nav .links a:hover{color:var(--ink)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--acc);color:var(--on);border:0;padding:10px 18px;border-radius:10px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.icon{background:none;border:1px solid var(--line);color:var(--ink);border-radius:10px;width:40px;height:40px}
+.crumbs{font-size:13px;color:var(--mut);padding:14px 0 0}
+.hero{padding:30px 0 22px}h1{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:8px 0 10px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:620px;margin:0 0 20px}
+.search{display:flex;gap:8px;max-width:640px}
+input,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;width:100%}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.stats{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap}.stats div{font-size:13px;color:var(--mut)}.stats b{display:block;font-size:24px;color:var(--ink)}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:24px;padding-bottom:50px}
+aside{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;align-self:start;position:sticky;top:76px}
+aside h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin:16px 0 8px}aside h3:first-child{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:99px;padding:5px 12px;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--acc);color:var(--on);border-color:var(--acc)}
+input[type=range]{padding:0;accent-color:var(--acc)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}.bar select{width:auto}
+#filterToggle{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.1)}
+.thumb{height:92px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;font-size:28px}
+.body{padding:14px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.body h4{margin:0;font-size:18px}.meta{color:var(--mut);font-size:14px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font-size:12px;background:var(--bg);border:1px solid var(--line);padding:2px 9px;border-radius:99px}
+.fee{font-weight:700;color:var(--acc)}.rate{color:var(--acc2)}
+.row{display:flex;gap:8px;align-items:center;margin-top:auto;padding-top:6px}.row .btn{flex:1;padding:8px}
+label.cmp{font-size:13px;color:var(--mut);display:flex;gap:5px;align-items:center;cursor:pointer}
+.heart{border:1px solid var(--line);background:none;border-radius:10px;width:38px;height:36px;color:var(--mut);font-size:18px}.heart[aria-pressed="true"]{color:#d6453d;border-color:#d6453d}
+.empty{padding:40px;text-align:center;color:var(--mut);background:var(--card);border:1px dashed var(--line);border-radius:14px}
+#tray{position:fixed;left:0;right:0;bottom:env(safe-area-inset-bottom,0px);background:var(--ink);color:var(--bg);padding:12px 18px;display:none;align-items:center;gap:12px;z-index:30;justify-content:center;flex-wrap:wrap}
+#tray .btn{background:var(--acc2);color:#1b1b1b}
+section.contact{background:var(--card);border-top:1px solid var(--line);padding:44px 0 90px}
+form{display:grid;gap:12px;max-width:520px}.err{color:#d6453d;font-size:13px;min-height:16px}
+.ok{background:var(--acc);color:var(--on);padding:14px;border-radius:10px;display:none}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);max-width:min(760px,94vw);width:100%;padding:20px}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:480px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{color:var(--mut);font-weight:600}
+footer{padding:22px 0;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:820px){.layout{grid-template-columns:1fr}aside{display:none;position:static}aside.open{display:block}#filterToggle{display:inline-block}nav .links a.hide{display:none}.search{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Main">
+<a class="logo" href="#top">Boarding<b>Finder</b></a>
+<div class="links"><a class="hide" href="#schools">Schools</a><a class="hide" href="#contact">Admissions help</a><button class="icon" id="theme" aria-label="Toggle dark mode">◐</button><a class="btn" href="#contact" style="color:var(--on)">Enquire</a></div>
+</nav></div></header>
+
+<main id="top">
+<div class="wrap">
+<div class="crumbs"><a href="#top">Home</a> › <a href="#schools">Schools</a> › Boarding schools in India</div>
+<section class="hero">
+<h1>Find the right boarding school,<br>without the guesswork.</h1>
+<p>Search, filter, shortlist and compare leading boarding schools across India. Fees shown are indicative annual estimates – always confirm with the school.</p>
+<div class="search"><input id="q" type="search" placeholder="Search by school or city (e.g. Dehradun)" aria-label="Search schools"><button class="btn" onclick="document.getElementById('schools').scrollIntoView()">Search</button></div>
+<div class="stats"><div><b id="sCount">0</b>schools listed</div><div><b id="sShort">0</b>shortlisted</div><div><b>Compare</b>up to 3 side by side</div></div>
+</section>
+
+<div class="layout" id="schools">
+<aside id="filters" aria-label="Filters">
+<h3>School type</h3><div class="chips" data-key="gender"></div>
+<h3>Board</h3><div class="chips" data-key="board"></div>
+<h3>State</h3><select id="state" aria-label="State"><option value="">All states</option></select>
+<h3>Max annual fee: <span id="feeLbl"></span></h3><input type="range" id="fee" min="4" max="12" step="0.5" value="12" aria-label="Maximum annual fee in lakh rupees">
+<h3>Shortlist</h3><label class="cmp"><input type="checkbox" id="onlyShort" style="width:auto"> Show shortlisted only</label>
+<p style="margin:16px 0 0"><button class="btn ghost" id="reset" style="width:100%">Reset filters</button></p>
+</aside>
+<div>
+<div class="bar"><button class="btn ghost" id="filterToggle">Filters</button><span id="count" class="meta" aria-live="polite"></span>
+<select id="sort" aria-label="Sort"><option value="rate">Top rated</option><option value="feeA">Fee: low to high</option><option value="feeD">Fee: high to low</option><option value="est">Oldest first</option></select></div>
+<div class="grid" id="grid"></div>
+</div></div>
+</div>
+
+<section class="contact" id="contact"><div class="wrap">
+<h2 style="margin-top:0">Get free admissions guidance</h2>
+<p class="meta">Tell us what you’re looking for and we’ll follow up with a shortlist.</p>
+<form id="form" novalidate>
+<div><input id="fn" placeholder="Parent’s name" aria-label="Name"><div class="err" id="e1"></div></div>
+<div><input id="fe" type="email" placeholder="Email" aria-label="Email"><div class="err" id="e2"></div></div>
+<div><input id="fp" inputmode="numeric" placeholder="Mobile (10 digits)" aria-label="Mobile"><div class="err" id="e3"></div></div>
+<select id="fc" aria-label="Class applying for"><option>Class VI</option><option>Class VII</option><option>Class VIII</option><option>Class IX</option><option>Class XI</option></select>
+<button class="btn" type="submit">Request a call back</button>
+<div class="ok" id="ok" role="status"></div>
+</form></div></section>
+</main>
+<footer><div class="wrap">Demo project. School details are indicative and for illustration; verify fees, boards and admissions on each school’s official website.</div></footer>
+
+<div id="tray"><span id="trayTxt"></span><button class="btn" id="openCmp">Compare now</button><button class="btn ghost" id="clrCmp" style="color:var(--bg);border-color:var(--bg)">Clear</button></div>
+<dialog id="dlg"><div style="display:flex;justify-content:space-between"><h3 style="margin:0">Compare schools</h3><button class="icon" onclick="dlg.close()" aria-label="Close">✕</button></div><div class="scroll" id="cmpBody"></div></dialog>
+
+<script>
+const S=[
+{n:"The Doon School",c:"Dehradun",s:"Uttarakhand",g:"Boys",b:"ICSE/ISC",e:1935,f:9.4,r:4.6,h:"#0f6b5c"},
+{n:"Welham Girls’ School",c:"Dehradun",s:"Uttarakhand",g:"Girls",b:"ICSE/ISC",e:1957,f:7.5,r:4.5,h:"#8a3b6e"},
+{n:"Mayo College",c:"Ajmer",s:"Rajasthan",g:"Boys",b:"ICSE/ISC",e:1875,f:8,r:4.5,h:"#9a3b2e"},
+{n:"Mayo College Girls’ School",c:"Ajmer",s:"Rajasthan",g:"Girls",b:"ICSE/ISC",e:1988,f:6.5,r:4.4,h:"#b5582b"},
+{n:"Bishop Cotton School",c:"Shimla",s:"Himachal Pradesh",g:"Boys",b:"ICSE/ISC",e:1859,f:6.5,r:4.4,h:"#2c5f8a"},
+{n:"The Lawrence School, Sanawar",c:"Solan",s:"Himachal Pradesh",g:"Co-ed",b:"ICSE/ISC",e:1847,f:6,r:4.5,h:"#3f6b2c"},
+{n:"The Scindia School",c:"Gwalior",s:"Madhya Pradesh",g:"Boys",b:"CBSE",e:1897,f:6,r:4.3,h:"#7a5a14"},
+{n:"Rishi Valley School",c:"Madanapalle",s:"Andhra Pradesh",g:"Co-ed",b:"IGCSE",e:1926,f:5.5,r:4.4,h:"#4a6a3a"},
+{n:"Woodstock School",c:"Mussoorie",s:"Uttarakhand",g:"Co-ed",b:"IB",e:1854,f:10,r:4.5,h:"#34567a"},
+{n:"Sherwood College",c:"Nainital",s:"Uttarakhand",g:"Boys",b:"ICSE/ISC",e:1869,f:6,r:4.2,h:"#5a3f7a"}];
+const $=id=>document.getElementById(id),st={gender:new Set(),board:new Set()};let short=new Set(),cmp=[];
+try{short=new Set(JSON.parse(localStorage.getItem("bf-short")||"[]"))}catch(e){}
+const uniq=k=>[...new Set(S.map(x=>x[k]))].sort();
+document.querySelectorAll(".chips").forEach(d=>{const k=d.dataset.key;uniq(k==="gender"?"g":"b").forEach(v=>{const b=document.createElement("button");b.className="chip";b.textContent=v;b.setAttribute("aria-pressed","false");b.onclick=()=>{const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",on);on?st[k].add(v):st[k].delete(v);render()};d.appendChild(b)})});
+uniq("s").forEach(v=>$("state").add(new Option(v,v)));
+["q","state","fee","sort","onlyShort"].forEach(i=>$(i).addEventListener("input",render));
+$("reset").onclick=()=>{$("q").value="";$("state").value="";$("fee").value=12;$("onlyShort").checked=false;st.gender.clear();st.board.clear();document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));render()};
+$("filterToggle").onclick=()=>$("filters").classList.toggle("open");
+function render(){
+const q=$("q").value.toLowerCase().trim(),st_=$("state").value,mf=+$("fee").value;$("feeLbl").textContent="₹"+mf+" lakh";
+let l=S.filter(x=>(!q||(x.n+x.c+x.s).toLowerCase().includes(q))&&(!st_||x.s===st_)&&x.f<=mf&&(!st.gender.size||st.gender.has(x.g))&&(!st.board.size||st.board.has(x.b))&&(!$("onlyShort").checked||short.has(x.n)));
+const o=$("sort").value;l.sort((a,b)=>o==="rate"?b.r-a.r:o==="feeA"?a.f-b.f:o==="feeD"?b.f-a.f:a.e-b.e);
+$("count").textContent=l.length+" school"+(l.length===1?"":"s")+" found";$("sCount").textContent=S.length;$("sShort").textContent=short.size;
+$("grid").innerHTML=l.length?l.map(x=>`<article class="card"><div class="thumb" style="background:linear-gradient(135deg,${x.h},#1b2a41)">${x.n.split(" ").filter(w=>/^[A-Z]/.test(w)&&w!=="The").slice(0,2).map(w=>w[0]).join("")}</div><div class="body"><h4>${x.n}</h4><div class="meta">📍 ${x.c}, ${x.s} · Est. ${x.e}</div><div class="tags"><span class="tag">${x.g}</span><span class="tag">${x.b}</span></div><div><span class="fee">≈ ₹${x.f} lakh/yr</span> · <span class="rate">★ ${x.r}</span></div><div class="row"><label class="cmp"><input type="checkbox" data-n="${x.n}" ${cmp.includes(x.n)?"checked":""}> Compare</label><button class="btn" onclick="enq('${x.n.replace(/’/g,"\\u2019")}')">Enquire</button><button class="heart" aria-pressed="${short.has(x.n)}" data-h="${x.n}" aria-label="Shortlist ${x.n}">${short.has(x.n)?"♥":"♡"}</button></div></div></article>`).join(""):`<div class="empty">No schools match these filters. Try widening the fee or clearing a filter.</div>`;
+document.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{const n=b.dataset.h;short.has(n)?short.delete(n):short.add(n);try{localStorage.setItem("bf-short",JSON.stringify([...short]))}catch(e){}render()});
+document.querySelectorAll("[data-n]").forEach(c=>c.onchange=()=>{const n=c.dataset.n;if(c.checked){if(cmp.length>=3){c.checked=false;alert("You can compare up to 3 schools.");return}cmp.push(n)}else cmp=cmp.filter(x=>x!==n);tray()})}
+function tray(){$("tray").style.display=cmp.length?"flex":"none";$("trayTxt").textContent=cmp.length+" selected (max 3)";$("openCmp").disabled=cmp.length<2;$("openCmp").style.opacity=cmp.length<2?.5:1}
+$("clrCmp").onclick=()=>{cmp=[];tray();render()};
+$("openCmp").onclick=()=>{const l=cmp.map(n=>S.find(x=>x.n===n));const R=[["Location",x=>x.c+", "+x.s],["Type",x=>x.g],["Board",x=>x.b],["Established",x=>x.e],["Annual fee (approx.)",x=>"₹"+x.f+" lakh"],["Rating",x=>"★ "+x.r]];
+$("cmpBody").innerHTML=`<table><tr><th></th>${l.map(x=>`<th>${x.n}</th>`).join("")}</tr>${R.map(r=>`<tr><th>${r[0]}</th>${l.map(x=>`<td>${r[1](x)}</td>`).join("")}</tr>`).join("")}</table>`;$("dlg").showModal()};
+const dlg=$("dlg");
+window.enq=n=>{$("contact").scrollIntoView();$("fn").focus();$("ok").style.display="none";$("ok").dataset.s=n};
+$("form").onsubmit=e=>{e.preventDefault();let v=true;const f=(i,er,t,m)=>{const bad=!t($(i).value.trim());$(er).textContent=bad?m:"";if(bad)v=false};
+f("fn","e1",x=>x.length>1,"Please enter your name.");f("fe","e2",x=>/^\S+@\S+\.\S+$/.test(x),"Enter a valid email.");f("fp","e3",x=>/^[6-9]\d{9}$/.test(x),"Enter a valid 10-digit mobile number.");
+if(v){const s=$("ok").dataset.s;$("ok").textContent="Thank you, "+$("fn").value.trim()+"! We’ll call you soon"+(s?" about "+s:"")+".";$("ok").style.display="block";$("form").reset()}};
+$("theme").onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).colorScheme==="dark"||r.dataset.theme==="dark";r.dataset.theme=d?"light":"dark"};
+render();
+</script>
+</body>
+</html>
